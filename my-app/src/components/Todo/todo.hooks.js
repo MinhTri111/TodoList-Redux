@@ -6,7 +6,6 @@ const todoHooks = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [todo, setTodo] = useState('');
     // eslint-disable-next-line react-hooks/rules-of-hooks
-
     return {
         showEdit,
         setShowEdit,

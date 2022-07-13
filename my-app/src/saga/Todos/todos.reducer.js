@@ -4,6 +4,7 @@ const initState = {
     isAddSuccess: false,
     isDeleteSucces: false,
     isUpdateSuccess: false,
+    isSetCompletedSuccess: false,
     error: null,
 };
 
@@ -32,18 +33,43 @@ const todosReducer = (state = initState, action) => {
                 isUpdateSuccess: false,
             };
         case Types.UPDATE_SUCCESS:
-            const todos = [...state.todoList];
-            const todoIndex = todos.findIndex((value) => value.id === action.payload.id);
-            todos[todoIndex] = { ...todos[todoIndex], title: action.payload.title };
+            const list_Update = [...state.todoList];
+            const getIndex_Update = list_Update.findIndex((value) => value.id === action.payload.id);
+            list_Update[getIndex_Update] = { ...list_Update[getIndex_Update], title: action.payload.title };
             return {
                 ...state,
-                todoList: [...todos],
+                todoList: [...list_Update],
                 isUpdateSuccess: true,
             };
         case Types.UPDATE_ERROR:
             return {
                 ...state,
                 isUpdateSuccess: false,
+                error: action.error,
+            };
+
+        case Types.COMPLETED_REQUEST:
+            return {
+                ...state,
+                isSetCompletedSuccess: false,
+            };
+        case Types.COMPLETED_SUCCESS:
+            const list_Completed = [...state.todoList];
+            const getIndex_Completed = list_Completed.findIndex((value) => value.id === action.payload.id);
+            console.log('thu', action.payload.id);
+            list_Completed[getIndex_Completed] = {
+                ...list_Completed[getIndex_Completed],
+                completed: action.payload.completed,
+            };
+            return {
+                ...state,
+                todoList: [...list_Completed],
+                isUpdateSuccess: true,
+            };
+        case Types.COMPLETED_ERROR:
+            return {
+                ...state,
+                isSetCompletedSuccess: false,
                 error: action.error,
             };
         case Types.DELETE_REQUEST:

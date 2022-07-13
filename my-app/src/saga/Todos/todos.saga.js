@@ -30,9 +30,21 @@ function* deleteSaga({ params, callback }) {
         console.log(error);
     }
 }
+function* completedSaga({ params, callback }) {
+    try {
+        yield put(Action.completedSuccess(params));
+        if (params.completed === true) {
+            callback();
+        }
+    } catch (error) {
+        yield put(Action.completedError(error));
+        console.log(error);
+    }
+}
 
 export function* todosSaga() {
     yield takeEvery(Types.ADD_REQUEST, addSaga);
     yield takeEvery(Types.UPDATE_REQUEST, updateSaga);
     yield takeEvery(Types.DELETE_REQUEST, deleteSaga);
+    yield takeEvery(Types.COMPLETED_REQUEST, completedSaga);
 }

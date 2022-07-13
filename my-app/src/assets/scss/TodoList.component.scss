@@ -10,21 +10,15 @@ body {
         justify-content: center;
         margin-top: 30px;
         .TodoList {
-            width: 40%;
+            width: 60%;
             border-radius: 20px;
             padding: 20px 50px;
             background: linear-gradient(#ef3b36, #ffffff);
             .AddTodo {
-                .Add {
-                    margin-bottom: 20px;
-                    label {
-                        margin-right: 10px;
-                        font-size: 18px;
-                        font-weight: bold;
-                    }
-                    .ant-input {
-                        width: 70%;
-                    }
+                margin: 0px auto;
+                label {
+                    font-size: 18px;
+                    font-weight: bold;
                 }
             }
             .todo {

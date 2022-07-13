@@ -1,14 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import { DeleteOutlined, EditOutlined, CheckOutlined, LogoutOutlined } from '@ant-design/icons';
-import { Button, Tooltip, Input } from 'antd';
+import { Checkbox, Button, Tooltip, Input, Row, Col } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteRequest, updateRequest } from '../../saga/Todos/todos.action';
+import { deleteRequest, updateRequest, completedRequest } from '../../saga/Todos/todos.action';
 import { todosSelector } from '../../saga/Todos/todos.selector';
 import todoHooks from './todo.hooks';
 import { toast } from 'react-toastify';
+const StytedDiv = styled.button`
+    padding-left: 10px;
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+`;
 export default function Todo(props) {
     const dispatch = useDispatch();
-    const { title, id } = props;
+    const { title, id, complete } = props;
     const { showEdit, setShowEdit, todo, setTodo } = todoHooks();
     const listTodo = useSelector(todosSelector);
     const handleChange = (e) => {
@@ -37,6 +43,7 @@ export default function Todo(props) {
             default:
         }
     };
+
     const handleDeleteClick = () => {
         dispatch(
             deleteRequest(id, () => {
@@ -48,13 +55,36 @@ export default function Todo(props) {
         setShowEdit(!showEdit);
         setTodo('');
     };
+
+    const handleChangeCheckbox = (e) => {
+        dispatch(
+            completedRequest({ id: id, completed: e.target.checked }, () => {
+                toast.success('This todo DONE!!!');
+            }),
+        );
+    };
     return (
         <>
             {!showEdit ? (
-                <div className="todo">
-                    <p className="test">{title}</p>
+                <Row>
+                    <Col span={18}>
+                        <p className="test">{title}</p>
+                    </Col>
+                    <Col span={1}>{complete && <CheckOutlined />}</Col>
 
-                    <div className="button">
+                    <Col span={5}>
+                        <StytedDiv>
+                            {complete ? (
+                                <Checkbox checked onChange={handleChangeCheckbox}>
+                                    Done
+                                </Checkbox>
+                            ) : (
+                                <Checkbox onChange={handleChangeCheckbox} checked={false}>
+                                    Done
+                                </Checkbox>
+                            )}
+                        </StytedDiv>
+
                         <Tooltip title="Delete">
                             <Button
                                 type="primary"
@@ -67,12 +97,25 @@ export default function Todo(props) {
                         <Tooltip title="Edit">
                             <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={handleEditClick} />
                         </Tooltip>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             ) : (
-                <div className="todo">
-                    <Input size="small" placeholder={title} onChange={handleChange} />
-                    <div className="button">
+                <Row>
+                    <Col span={19}>
+                        <Input size="medium" placeholder={title} onChange={handleChange} />
+                    </Col>
+                    <Col span={5}>
+                        <StytedDiv>
+                            {complete ? (
+                                <Checkbox checked onChange={handleChangeCheckbox}>
+                                    Done
+                                </Checkbox>
+                            ) : (
+                                <Checkbox onChange={handleChangeCheckbox} checked={false}>
+                                    Done
+                                </Checkbox>
+                            )}
+                        </StytedDiv>
                         <Tooltip title="Exit">
                             <Button
                                 type="primary"
@@ -85,8 +128,8 @@ export default function Todo(props) {
                         <Tooltip title="Save">
                             <Button type="primary" shape="circle" icon={<CheckOutlined />} onClick={handleSaveClick} />
                         </Tooltip>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             )}
         </>
     );

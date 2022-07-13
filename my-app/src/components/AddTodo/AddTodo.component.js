@@ -1,6 +1,6 @@
 import React from 'react';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Tooltip, Input } from 'antd';
+import { Button, Tooltip, Input, Col, Row } from 'antd';
 import { v4 as uuid } from 'uuid';
 import { addRequest } from '../../saga/Todos/todos.action';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,7 +23,7 @@ export default function AddTodo() {
                 const check = listTodo?.findIndex((value) => value.title === newTodo);
                 if (check === -1) {
                     return dispatch(
-                        addRequest({ id: uuid(), title: newTodo }, () => {
+                        addRequest({ id: uuid(), title: newTodo, completed: false }, () => {
                             toast.success('Add Success!');
                             setNewTodo('');
                         }),
@@ -35,12 +35,20 @@ export default function AddTodo() {
     };
 
     return (
-        <div className="Add">
-            <label htmlFor="todo">Input Todo</label>
-            <Input placeholder="New Todo" size="small" id="todo" onChange={handleChange} value={newTodo} />
-            <Tooltip title="Add">
-                <Button type="primary" shape="circle" icon={<PlusCircleOutlined />} onClick={handleClickAdd} />
-            </Tooltip>
-        </div>
+        <>
+            <Row>
+                <Col span={3}>
+                    <label htmlFor="todo">Input Todo</label>
+                </Col>
+                <Col span={20}>
+                    <Input placeholder="New Todo" size="medium" id="todo" onChange={handleChange} value={newTodo} />
+                </Col>
+                <Col span={1}>
+                    <Tooltip title="Add">
+                        <Button type="primary" shape="circle" icon={<PlusCircleOutlined />} onClick={handleClickAdd} />
+                    </Tooltip>
+                </Col>
+            </Row>
+        </>
     );
 }

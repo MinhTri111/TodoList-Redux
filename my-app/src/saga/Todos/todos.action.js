@@ -7,6 +7,10 @@ export const updateRequest = (params, callback) => ({ type: Types.UPDATE_REQUEST
 export const updateSuccess = (data) => ({ type: Types.UPDATE_SUCCESS, payload: data });
 export const updateError = (error) => ({ type: Types.UPDATE_ERROR, error });
 
+export const completedRequest = (params, callback) => ({ type: Types.COMPLETED_REQUEST, params, callback });
+export const completedSuccess = (data) => ({ type: Types.COMPLETED_SUCCESS, payload: data });
+export const completedError = (error) => ({ type: Types.COMPLETED_ERROR, error });
+
 export const deleteRequest = (params, callback) => ({ type: Types.DELETE_REQUEST, params, callback });
 export const deleteSuccess = (id) => ({ type: Types.DELETE_SUCCESS, payload: id });
 export const deleteError = (error) => ({ type: Types.DELETE_ERROR, error });
