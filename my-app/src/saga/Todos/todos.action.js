@@ -1,0 +1,12 @@
+import * as Types from './todos.type';
+export const addRequest = (params, callback) => ({ type: Types.ADD_REQUEST, params, callback });
+export const addSuccess = (payload) => ({ type: Types.ADD_SUCCESS, payload: payload });
+export const addError = (error) => ({ type: Types.ADD_ERROR, error });
+
+export const updateRequest = (params, callback) => ({ type: Types.UPDATE_REQUEST, params, callback });
+export const updateSuccess = (data) => ({ type: Types.UPDATE_SUCCESS, payload: data });
+export const updateError = (error) => ({ type: Types.UPDATE_ERROR, error });
+
+export const deleteRequest = (params, callback) => ({ type: Types.DELETE_REQUEST, params, callback });
+export const deleteSuccess = (id) => ({ type: Types.DELETE_SUCCESS, payload: id });
+export const deleteError = (error) => ({ type: Types.DELETE_ERROR, error });

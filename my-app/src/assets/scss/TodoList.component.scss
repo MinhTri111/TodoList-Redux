@@ -1,0 +1,47 @@
+body {
+    background: linear-gradient(#ee9ca7, #ffdde1);
+    font-family: Comic Sans, Comic Sans MS, cursive;
+    h1 {
+        text-align: center;
+        font-size: 100px;
+    }
+    .App {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        .TodoList {
+            width: 40%;
+            border-radius: 20px;
+            padding: 20px 50px;
+            background: linear-gradient(#ef3b36, #ffffff);
+            .AddTodo {
+                .Add {
+                    margin-bottom: 20px;
+                    label {
+                        margin-right: 10px;
+                        font-size: 18px;
+                        font-weight: bold;
+                    }
+                    .ant-input {
+                        width: 70%;
+                    }
+                }
+            }
+            .todo {
+                display: flex;
+                justify-content: space-between;
+                Button {
+                    margin-left: 10px;
+                }
+                .ant-input {
+                    width: 82%;
+                }
+                p.test {
+                    width: 80%;
+                    padding-left: 20px;
+                    word-wrap: break-word;
+                }
+            }
+        }
+    }
+}
