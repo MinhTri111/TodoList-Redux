@@ -1,5 +1,5 @@
 import React from 'react';
-import { DeleteOutlined, EditOutlined, CheckOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, CheckOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Button, Tooltip, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteRequest, updateRequest } from '../../saga/Todos/todos.action';
@@ -44,6 +44,10 @@ export default function Todo(props) {
             }),
         );
     };
+    const handleExitClick = () => {
+        setShowEdit(!showEdit);
+        setTodo('');
+    };
     return (
         <>
             {!showEdit ? (
@@ -69,6 +73,15 @@ export default function Todo(props) {
                 <div className="todo">
                     <Input size="small" placeholder={title} onChange={handleChange} />
                     <div className="button">
+                        <Tooltip title="Exit">
+                            <Button
+                                type="primary"
+                                danger
+                                shape="circle"
+                                icon={<LogoutOutlined />}
+                                onClick={handleExitClick}
+                            />
+                        </Tooltip>
                         <Tooltip title="Save">
                             <Button type="primary" shape="circle" icon={<CheckOutlined />} onClick={handleSaveClick} />
                         </Tooltip>
