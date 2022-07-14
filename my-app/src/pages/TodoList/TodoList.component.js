@@ -18,26 +18,27 @@ const TodoList = () => {
     const listTodo = useSelector(todosSelector);
     const [selectChange, setSelectChange] = useState(false);
     const handleChange = (value) => {
-        dispatch(
-            sortRequest(value, () => {
-                toast.success(`Sort By ${value} Success!!!`);
-                setSelectChange(!selectChange);
-            }),
-        );
+        if (listTodo.length > 1) {
+            dispatch(
+                sortRequest(value, () => {
+                    toast.success(`Sort By ${value} Success!!!`);
+                    setSelectChange(!selectChange);
+                }),
+            );
+        }
     };
 
     return (
         <div className="App">
             <div className="TodoList">
-                <Row>
+                <Row justify="left">
                     <Col span={24}>
                         <h1>Todo App</h1>
                     </Col>
                     <Col span={24}>
                         <AddTodo />
                     </Col>
-                    <Col span={19}></Col>
-                    <Col span={5}>
+                    <Col span={4} offset={20}>
                         <StytedDiv>
                             Sort by:
                             <Select

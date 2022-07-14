@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { DeleteOutlined, EditOutlined, CheckOutlined, LogoutOutlined } from '@ant-design/icons';
-import { Checkbox, Button, Tooltip, Input, Row, Col } from 'antd';
+import { Checkbox, Button, Tooltip, Input, Row, Col, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteRequest, updateRequest, completedRequest } from '../../saga/Todos/todos.action';
 import { todosSelector } from '../../saga/Todos/todos.selector';
@@ -84,19 +84,25 @@ export default function Todo(props) {
                                 </Checkbox>
                             )}
                         </StytedDiv>
-
-                        <Tooltip title="Delete">
-                            <Button
-                                type="primary"
-                                danger
-                                shape="circle"
-                                icon={<DeleteOutlined />}
-                                onClick={handleDeleteClick}
-                            />
-                        </Tooltip>
-                        <Tooltip title="Edit">
-                            <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={handleEditClick} />
-                        </Tooltip>
+                        <Space>
+                            <Tooltip title="Delete">
+                                <Button
+                                    type="primary"
+                                    danger
+                                    shape="circle"
+                                    icon={<DeleteOutlined />}
+                                    onClick={handleDeleteClick}
+                                />
+                            </Tooltip>
+                            <Tooltip title="Edit">
+                                <Button
+                                    type="primary"
+                                    shape="circle"
+                                    icon={<EditOutlined />}
+                                    onClick={handleEditClick}
+                                />
+                            </Tooltip>
+                        </Space>
                     </Col>
                 </Row>
             ) : (
@@ -116,18 +122,25 @@ export default function Todo(props) {
                                 </Checkbox>
                             )}
                         </StytedDiv>
-                        <Tooltip title="Exit">
-                            <Button
-                                type="primary"
-                                danger
-                                shape="circle"
-                                icon={<LogoutOutlined />}
-                                onClick={handleExitClick}
-                            />
-                        </Tooltip>
-                        <Tooltip title="Save">
-                            <Button type="primary" shape="circle" icon={<CheckOutlined />} onClick={handleSaveClick} />
-                        </Tooltip>
+                        <Space>
+                            <Tooltip title="Exit">
+                                <Button
+                                    type="primary"
+                                    danger
+                                    shape="circle"
+                                    icon={<LogoutOutlined />}
+                                    onClick={handleExitClick}
+                                />
+                            </Tooltip>
+                            <Tooltip title="Save">
+                                <Button
+                                    type="primary"
+                                    shape="circle"
+                                    icon={<CheckOutlined />}
+                                    onClick={handleSaveClick}
+                                />
+                            </Tooltip>
+                        </Space>
                     </Col>
                 </Row>
             )}
