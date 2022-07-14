@@ -41,10 +41,20 @@ function* completedSaga({ params, callback }) {
         console.log(error);
     }
 }
+function* sortSaga({ params, callback }) {
+    try {
+        yield put(Action.sortSuccess(params));
+        callback();
+    } catch (error) {
+        yield put(Action.sortError(error));
+        console.log(error);
+    }
+}
 
 export function* todosSaga() {
     yield takeEvery(Types.ADD_REQUEST, addSaga);
     yield takeEvery(Types.UPDATE_REQUEST, updateSaga);
     yield takeEvery(Types.DELETE_REQUEST, deleteSaga);
     yield takeEvery(Types.COMPLETED_REQUEST, completedSaga);
+    yield takeEvery(Types.SORT_REQUEST, sortSaga);
 }

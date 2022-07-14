@@ -14,3 +14,7 @@ export const completedError = (error) => ({ type: Types.COMPLETED_ERROR, error }
 export const deleteRequest = (params, callback) => ({ type: Types.DELETE_REQUEST, params, callback });
 export const deleteSuccess = (id) => ({ type: Types.DELETE_SUCCESS, payload: id });
 export const deleteError = (error) => ({ type: Types.DELETE_ERROR, error });
+
+export const sortRequest = (params, callback) => ({ type: Types.SORT_REQUEST, params, callback });
+export const sortSuccess = (payload) => ({ type: Types.SORT_SUCCESS, payload: payload });
+export const sortError = (error) => ({ type: Types.SORT_ERROR, error });

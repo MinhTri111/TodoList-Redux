@@ -1,13 +1,31 @@
 import 'antd/dist/antd.min.css';
-import { List, Row, Col, Divider } from 'antd';
+import { List, Row, Col, Divider, Select } from 'antd';
 import { AddTodo, Todo } from '../../components';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
 import { todosSelector } from '../../saga/Todos/todos.selector';
-import React from 'react';
+import { useDispatch } from 'react-redux';
+import { sortRequest } from '../../saga/Todos/todos.action';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+const StytedDiv = styled.div`
+    margin-top: 10px;
+`;
+const { Option } = Select;
 const TodoList = () => {
+    const dispatch = useDispatch();
     const listTodo = useSelector(todosSelector);
+    const [selectChange, setSelectChange] = useState(false);
+    const handleChange = (value) => {
+        dispatch(
+            sortRequest(value, () => {
+                toast.success(`Sort By ${value} Success!!!`);
+                setSelectChange(!selectChange);
+            }),
+        );
+    };
+
     return (
         <div className="App">
             <div className="TodoList">
@@ -17,6 +35,21 @@ const TodoList = () => {
                     </Col>
                     <Col span={24}>
                         <AddTodo />
+                    </Col>
+                    <Col span={19}></Col>
+                    <Col span={5}>
+                        <StytedDiv>
+                            Sort by:
+                            <Select
+                                style={{
+                                    width: 120,
+                                }}
+                                onChange={handleChange}
+                            >
+                                <Option value="name">Todo</Option>
+                                <Option value="completed">Completed</Option>
+                            </Select>
+                        </StytedDiv>
                     </Col>
                     <Divider plan="true">LIST TODO</Divider>
                     <Col span={24}>

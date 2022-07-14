@@ -9,14 +9,14 @@ const rootPersistConfig = {
     blacklist: ['todo'],
 };
 
-const authPersistConfig = {
+const todoPersistConfig = {
     key: 'todo',
     storage: storage,
     blacklist: ['todolist'],
 };
 const rootReducer = () =>
     combineReducers({
-        todos: persistReducer(authPersistConfig, todosReducer),
+        todos: persistReducer(todoPersistConfig, todosReducer),
     });
 
 export default persistReducer(rootPersistConfig, rootReducer());

@@ -4,6 +4,7 @@ const initState = {
     isAddSuccess: false,
     isDeleteSucces: false,
     isUpdateSuccess: false,
+    isSortSuccess: false,
     isSetCompletedSuccess: false,
     error: null,
 };
@@ -93,7 +94,31 @@ const todosReducer = (state = initState, action) => {
                 isDeleteSucces: false,
                 error: action.error,
             };
-
+        case Types.SORT_REQUEST:
+            return { ...state, isSortSuccess: false };
+        case Types.SORT_SUCCESS:
+            //eslint-disable-next-line default-case
+            switch (action.payload) {
+                case 'name':
+                    return {
+                        ...state,
+                        todoList: state.todoList.sort((a, b) => a.title.localeCompare(b.title)),
+                        isSortSuccess: true,
+                    };
+                case 'completed':
+                    return {
+                        ...state,
+                        todoList: state.todoList.sort((a, b) => b.completed - a.completed),
+                        isSortSuccess: true,
+                    };
+            }
+        //eslint-disable-next-line no-fallthrough
+        case Types.SORT_ERROR:
+            return {
+                ...state,
+                isSortSuccess: false,
+                error: action.error,
+            };
         default:
             return state;
     }

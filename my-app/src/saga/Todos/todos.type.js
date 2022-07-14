@@ -13,3 +13,7 @@ export const COMPLETED_ERROR = 'COMPLETED_ERROR';
 export const DELETE_REQUEST = 'DELETE_REQUEST';
 export const DELETE_SUCCESS = 'DELETE_SUCCESS';
 export const DELETE_ERROR = 'DELETE_ERROR';
+
+export const SORT_REQUEST = 'SORT_REQUEST';
+export const SORT_SUCCESS = 'SORT_SUCCESS';
+export const SORT_ERROR = 'SORT_ERROR';
