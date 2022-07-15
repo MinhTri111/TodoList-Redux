@@ -8,7 +8,7 @@ import { todosSelector } from '../../saga/Todos/todos.selector';
 import 'react-toastify/dist/ReactToastify.css';
 import addTodoHook from './addTodo.hooks';
 import { toast } from 'react-toastify';
-export default function AddTodo() {
+export default function AddTodo({ setListSearch }) {
     const dispatch = useDispatch();
     const { newTodo, setNewTodo } = addTodoHook();
     const handleChange = (e) => {
@@ -26,6 +26,7 @@ export default function AddTodo() {
                         addRequest({ id: uuid(), title: newTodo, completed: false }, () => {
                             toast.success('Add Success!');
                             setNewTodo('');
+                            setListSearch('');
                         }),
                     );
                 }

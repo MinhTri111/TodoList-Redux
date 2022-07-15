@@ -6,6 +6,7 @@ const initState = {
     isUpdateSuccess: false,
     isSortSuccess: false,
     isSetCompletedSuccess: false,
+    isSearchSuccess: false,
     error: null,
 };
 

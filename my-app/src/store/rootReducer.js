@@ -14,6 +14,7 @@ const todoPersistConfig = {
     storage: storage,
     blacklist: ['todolist'],
 };
+
 const rootReducer = () =>
     combineReducers({
         todos: persistReducer(todoPersistConfig, todosReducer),

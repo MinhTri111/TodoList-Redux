@@ -14,7 +14,7 @@ const StytedDiv = styled.button`
 `;
 export default function Todo(props) {
     const dispatch = useDispatch();
-    const { title, id, complete } = props;
+    const { title, id, complete, setListSearch } = props;
     const { showEdit, setShowEdit, todo, setTodo } = todoHooks();
     const listTodo = useSelector(todosSelector);
     const handleChange = (e) => {
@@ -48,6 +48,7 @@ export default function Todo(props) {
         dispatch(
             deleteRequest(id, () => {
                 toast.success('Delete Success!!!');
+                setListSearch('');
             }),
         );
     };
