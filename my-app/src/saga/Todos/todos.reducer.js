@@ -1,6 +1,7 @@
 import * as Types from './todos.type';
 const initState = {
     todoList: [],
+    search: '',
     isAddSuccess: false,
     isDeleteSucces: false,
     isUpdateSuccess: false,
@@ -119,6 +120,23 @@ const todosReducer = (state = initState, action) => {
                 ...state,
                 isSortSuccess: false,
                 error: action.error,
+            };
+        case Types.SEARCH_REQUEST:
+            return {
+                ...state,
+                isSearchSuccess: false,
+            };
+        case Types.SEARCH_SUCCESS:
+            return {
+                ...state,
+                search: action.payload,
+
+                isSearchSuccess: true,
+            };
+        case Types.SEARCH_ERROR:
+            return {
+                ...state,
+                isSearchSuccess: false,
             };
         default:
             return state;

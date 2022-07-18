@@ -18,3 +18,7 @@ export const deleteError = (error) => ({ type: Types.DELETE_ERROR, error });
 export const sortRequest = (params, callback) => ({ type: Types.SORT_REQUEST, params, callback });
 export const sortSuccess = (payload) => ({ type: Types.SORT_SUCCESS, payload: payload });
 export const sortError = (error) => ({ type: Types.SORT_ERROR, error });
+
+export const searchRequest = (params) => ({ type: Types.SEARCH_REQUEST, params });
+export const searchSuccess = (payload) => ({ type: Types.SEARCH_SUCCESS, payload: payload });
+export const searchError = (error) => ({ type: Types.SEARCH_ERROR, error });

@@ -1,12 +1,13 @@
 import 'antd/dist/antd.min.css';
-import { List, Row, Col, Divider, Select, Input } from 'antd';
+import { List, Row, Col, Divider, Select, Input, Tooltip, Button } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import { AddTodo, Todo } from '../../components';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
 import { todosSelector } from '../../saga/Todos/todos.selector';
 import { useDispatch } from 'react-redux';
-import { sortRequest } from '../../saga/Todos/todos.action';
+import { sortRequest, searchRequest } from '../../saga/Todos/todos.action';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 const StytedDiv = styled.div`
@@ -16,9 +17,8 @@ const { Option } = Select;
 const TodoList = () => {
     const dispatch = useDispatch();
     const listTodo = useSelector(todosSelector);
-    const [listSearch, setListSearch] = useState([]);
+    console.log(listTodo);
     const [selectChange, setSelectChange] = useState(false);
-
     const handleChange = (value) => {
         if (listTodo.length > 1) {
             dispatch(
@@ -29,10 +29,9 @@ const TodoList = () => {
             );
         }
     };
-    console.log('search', listSearch);
 
     const handleChangeSearch = (e) => {
-        setListSearch(listTodo.filter((value) => value.title.includes(e.target.value)));
+        dispatch(searchRequest(e.target.value));
     };
 
     return (
@@ -43,7 +42,7 @@ const TodoList = () => {
                         <h1>Todo App</h1>
                     </Col>
                     <Col span={24}>
-                        <AddTodo setListSearch={setListSearch} />
+                        <AddTodo />
                     </Col>
                     <Col span={4}>
                         <StytedDiv>
@@ -65,6 +64,11 @@ const TodoList = () => {
                             <Input placeholder="Search" size="medium" onChange={handleChangeSearch} />
                         </StytedDiv>
                     </Col>
+                    <Col span={1} style={{ marginTop: 40 }}>
+                        <Tooltip title="Add">
+                            <Button type="primary" shape="circle" icon={<SearchOutlined />} />
+                        </Tooltip>
+                    </Col>
 
                     <Divider plan="true">LIST TODO</Divider>
                     <Col span={24}>
@@ -78,16 +82,10 @@ const TodoList = () => {
                                     },
                                     pageSize: 4,
                                 }}
-                                dataSource={listSearch.length > 0 ? listSearch : listTodo}
+                                dataSource={listTodo}
                                 renderItem={(item) => (
                                     <List.Item>
-                                        <Todo
-                                            title={item.title}
-                                            id={item.id}
-                                            key={item.id}
-                                            complete={item.completed}
-                                            setListSearch={setListSearch}
-                                        />
+                                        <Todo title={item.title} id={item.id} key={item.id} complete={item.completed} />
                                     </List.Item>
                                 )}
                             />

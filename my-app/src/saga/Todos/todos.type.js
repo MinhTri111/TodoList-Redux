@@ -17,3 +17,7 @@ export const DELETE_ERROR = 'DELETE_ERROR';
 export const SORT_REQUEST = 'SORT_REQUEST';
 export const SORT_SUCCESS = 'SORT_SUCCESS';
 export const SORT_ERROR = 'SORT_ERROR';
+
+export const SEARCH_REQUEST = 'SEARCH_REQUEST';
+export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
+export const SEARCH_ERROR = 'SEARCH_ERROR';
